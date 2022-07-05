@@ -3,24 +3,24 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>A First App</title>
+    <title>Vue Basics</title>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Jost:wght@400;700&display=swap"
+      rel="stylesheet"
+    />
     <link rel="stylesheet" href="styles.css" />
+    <script src="https://unpkg.com/vue@next" defer></script>
+    <script src="app.js" defer></script>
   </head>
   <body>
-    <div id="app">
-      <div>
-        <label for="goal">Goal</label>
-        <input type="text" id="goal" v-model="enteredValue" />
-        <button v-on:click="addGoal">Add Goal</button>
-      </div>
-      <ul>
-        <li v-for="(goal) in goals">
-          <span> {{ goal }}</span>
-          <a href="#" v-on:click="removeGoal(goal)">X</a>
-        </li>
-      </ul>
-    </div>
-    <script src="https://unpkg.com/vue@next"></script>
-    <script src="app.js"></script>
+    <header>
+      <h1>Vue Course Goals</h1>
+    </header>
+    <section id="user-goal">
+      <h2>{{ content }}</h2>
+      <p>{{ courseGoal }}</p>
+      <p>Learn more <a v-bind:href="linkVue">about vue</a></p>
+      <button @click="outputGoal">Change Content</button>
+    </section>
   </body>
 </html>

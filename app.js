@@ -1,17 +1,20 @@
-Vue.createApp({
+const app = Vue.createApp({
     data() {
         return {
-            goals: [],
-            enteredValue: ''
+            courseGoal: 'Finish the course and learn Vue',
+            linkVue: 'fb.com',
+            content: 'Learn Vue',
         };
     },
     methods: {
-        addGoal() {
-            this.goals.push(this.enteredValue);
-            this.enteredValue = '';
-        },
-        removeGoal(goal) {
-            this.goals.splice(this.goals.indexOf(goal), 1);
-        },
+        outputGoal() {
+            let randomNumber = Math.random();
+            if (randomNumber < 0.5) {
+                return this.content = 'Learn Vue';
+            } else {
+                return this.content = 'Learn PHP';
+            }
+        }
     }
-}).mount('#app');
+});
+app.mount('#user-goal');
