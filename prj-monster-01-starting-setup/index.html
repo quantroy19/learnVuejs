@@ -18,18 +18,13 @@
     </header>
     <div id="game">
       <section id="monster" class="container">
-        <h2 v-if="monsterHealth === 0" class="log--damage">Monster Lost LOL</h2>
-        <h2 v-if="yourHealth === 0" class="log--damage">Your Lost LOL</h2>
         <h2>Monster Health</h2>
         <div class="healthbar">
           <div
             class="healthbar__value"
             :style="{width: monsterHealth + '%'}"
           ></div>
-          <div
-            class="healthbar_lost"
-            :style="{width: monsterHealth + '%'}"
-          ></div>
+          <div class="healthbar_lost" :style="monsterBarStyles"></div>
         </div>
       </section>
       <section id="player" class="container">
@@ -39,18 +34,37 @@
             class="healthbar__value"
             :style="{width: yourHealth + '%'}"
           ></div>
-          <div class="healthbar_lost" :style="{width: yourHealth + '%'}"></div>
+          <div class="healthbar_lost" :style="yourBarStyles"></div>
         </div>
       </section>
-      <section id="controls">
+      <section class="container" v-if="win">
+        <h2>End Game</h2>
+        <h3 v-if="win == 'your'">You Win</h3>
+        <h3 v-else-if="win == 'monster'">You Lost</h3>
+        <h3 v-else-if="win == 'draw'">It's a draw</h3>
+      </section>
+
+      <section id="controls" v-if="!win">
         <button @click="attckMonster">ATTACK</button>
-        <button @click="specialAttackMonster">SPECIAL ATTACK</button>
+        <button
+          :disabled="rountCanUsespecialAttackMonster"
+          @click="specialAttackMonster"
+        >
+          SPECIAL ATTACK
+        </button>
         <button @click="healYour">HEAL</button>
         <button @click="surrender">SURRENDER</button>
       </section>
+      <section v-if="win">
+        <button @click="start">Start</button>
+      </section>
       <section id="log" class="container">
         <h2>Battle Log</h2>
-        <ul></ul>
+        <ul>
+          <li v-for="log in logMessage">
+            {{log.actionBy}} - {{log.actionType}} -- {{log.actionValue}}
+          </li>
+        </ul>
       </section>
     </div>
   </body>
