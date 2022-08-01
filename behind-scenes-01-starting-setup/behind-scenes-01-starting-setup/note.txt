@@ -1,0 +1,3 @@
+tạo ra DOM ảo, mỗi phiên bản mới và so sánh bản cũ, và update DOM thật
+
+beforeCreate()
